@@ -1,0 +1,8 @@
+.btn-add-to-cart {
+    display: none; /* Ocultar el botón por defecto */
+  }
+  
+  .card:hover .btn-add-to-cart {
+    display: block; /* Mostrar el botón al pasar el mouse sobre la tarjeta */
+  }
+  
