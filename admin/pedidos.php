@@ -7,11 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-   GFHFGHFGHFGHFGHFGHFGH dshrtyhryryt
-    SDSDFSDFSDFSDF
-    SDSDFSDFSDFSDFSDFGBFGBFG
-    bi-file-earmark-bar-graphGFB
-    GFBGB
-    GFBGBFGB
+drgergwewetewtwtwetwetwetwetwetwetwewetwetwetwetwewete
 </body>
 </html>
