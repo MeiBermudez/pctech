@@ -10,7 +10,7 @@
     <script>
         $(document).ready(function() {
             // Cargar página inicial al cargar la interfaz del administrador
-            $("#content").load("pedidos.php");
+            $("#content").load("dashboard.php");
 
             // Manejar los eventos de clic en los elementos del menú
             $(".nav-link").click(function(e) {
@@ -94,7 +94,7 @@
     <header>
         <nav class="navbar navbar-dark bg-dark fixed-top">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Panel de Administrador</a>
+                <a class="navbar-brand" href="menu.php">Panel de Administrador</a>
             </div>
         </nav>
     </header>
