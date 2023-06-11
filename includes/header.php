@@ -47,19 +47,20 @@
                                 <i class="fas fa-user small-icon"></i> Iniciar sesión
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
-                                <form class="px-4 py-3 custom-form">
+                                <form class="px-4 py-3 custom-form" action="login.php" method="POST">
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Correo electrónico</label>
-                                        <input type="email" class="form-control" id="email" placeholder="Ingresa tu correo electrónico">
+                                        <input type="email" class="form-control" id="email" name="correo" placeholder="Ingresa tu correo electrónico">
                                     </div>
                                     <div class="mb-3">
                                         <label for="password" class="form-label">Contraseña</label>
-                                        <input type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña">
+                                        <input type="password" class="form-control" id="clave" name="clave" placeholder="Ingresa tu contraseña">
                                     </div>
                                     <div class="d-grid gap-2">
                                         <button type="submit" class="btn btn-primary">Iniciar sesión</button>
                                     </div>
                                 </form>
+
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">
                                     ¿Aún no tienes una cuenta?
@@ -79,7 +80,7 @@
             </div>
         </nav>
     </header>
-<!--menu de la pagina-->
+    <!--menu de la pagina-->
     <div id="navbar-container">
         <nav id="categories-navbar" class="navbar navbar-expand-lg navbar-light bg-light w-100 text-center">
             <div class="container">
@@ -133,7 +134,7 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="sublimacion.php"><i class="fas fa-paint-brush"></i> <span>Sublimación</span></a>
+                            <a class="nav-link" href="sublimacion.php"><i class="fas fa-paint-brush"></i> <span>Sublimación</span></a>
                         </li>
                     </ul>
                 </div>

@@ -3,18 +3,19 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Otros elementos del encabezado -->
-    <title>Adaptadores</title>
+    <title>Almacenamiento</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+  
+    </script>
     <style>
         /* Estilos CSS personalizados */
         .price_label {
@@ -67,8 +68,9 @@
 </head>
 
 <body>
+
     <div class="container">
-        <h1 class="text-center my-4">Adaptadores</h1>
+        <h1 class="text-center my-4">Almacenamiento</h1>
         <div class="row">
             <div class="col-md-3">
                 <div class="card mb-4">
@@ -145,86 +147,99 @@
                             <h5>Nombre del Producto</h5>
                             <div class="d-flex align-items-center mb-3">
                                 <div class="input-group">
-                                    <input type="number" id="quantity" name="quantity" min="1" value="1" class="form-control input-quantity">
-                                    <button class="btn btn-primary btn-add-to-cart-modal" style="background-color: orange; color: white;">Agregar al carrito</button>
+                                    <input type="number" id="quantity" name="quantity" min="1" value="1" class="form-control form-control-sm input-quantity">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary btn-add-to-cart" style="background-color: orange; color: white;">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                            <p id="product-description"></p>
+                            <p>Información adicional</p>
+                            <p>Precio: $99.99</p>
                         </div>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
     </div>
 
- 
     <script>
-    $(document).ready(function () {
-        var minPrice = 0;
-        var maxPrice = 100;
-        var priceRange = $("#price-range");
+        $(document).ready(function () {
+            var minPrice = 0;
+            var maxPrice = 100;
+            var priceRange = $("#price-range");
 
-        // Inicializar el slider
-        $("#price-slider").slider({
-            range: true,
-            min: 0,
-            max: 100,
-            values: [0, 100],
-            slide: function (event, ui) {
+            // Inicializar el slider
+            $("#price-slider").slider({
+                range: true,
+                min: 0,
+                max: 100,
+                values: [0, 100],
+                slide: function (event, ui) {
+                    priceRange.text("$" + ui.values[0] + " - $" + ui.values[1]);
+                }
+            });
+
+            // Mostrar el rango de precio inicial
+            var initialRange = $("#price-slider").slider("values");
+            priceRange.text("$" + initialRange[0] + " - $" + initialRange[1]);
+
+            // Filtrar productos al hacer clic en el botón "Filtrar"
+            $("#filter-button").on("click", function () {
+                var minPrice = $("#price-slider").slider("values", 0);
+                var maxPrice = $("#price-slider").slider("values", 1);
+
+                // Filtrar los productos según el rango de precio
+                $("#product-list .card").each(function () {
+                    var productPrice = parseFloat($(this).find(".card-text").text().replace("$", ""));
+                    if (productPrice >= minPrice && productPrice <= maxPrice) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+
+            // Actualizar el rango de precio al mover el slider
+            $("#price-slider").on("slide", function (event, ui) {
                 priceRange.text("$" + ui.values[0] + " - $" + ui.values[1]);
-            }
-        });
+            });
+            // Menú del encabezado
+            $(".nav-link").click(function () {
+                $(".nav-link").removeClass("active");
+                $(this).addClass("active");
+            });
 
-        // Mostrar el rango de precio inicial
-        var initialRange = $("#price-slider").slider("values");
-        priceRange.text("$" + initialRange[0] + " - $" + initialRange[1]);
+            // Modal
+            $(".btn-description").click(function () {
+                var productId = $(this).data("product-id");
+                var productTitle = $(this).data("product-title");
+                var productImage = $(this).data("product-image");
+                var productDescription = $(this).data("product-description");
 
-        // Filtrar productos al hacer clic en el botón "Filtrar"
-        $("#filter-button").on("click", function () {
-            var minPrice = $("#price-slider").slider("values", 0);
-            var maxPrice = $("#price-slider").slider("values", 1);
+                $(".modal-title").text(productTitle);
+                $(".modal-img").attr("src", productImage);
+                $(".modal-description").text(productDescription);
 
-            // Filtrar los productos según el rango de precio
-            $("#product-list .card").each(function () {
-                var productPrice = parseFloat($(this).find(".card-text").text().replace("$", ""));
-                if (productPrice >= minPrice && productPrice <= maxPrice) {
-                    $(this).show();
-                } else {
-                    $(this).hide();
+                $("#product-modal").modal("show");
+            });
+
+            // Slider de precio
+            $("#price-slider").slider({
+                range: true,
+                min: 0,
+                max: 200,
+                values: [0, 200],
+                slide: function (event, ui) {
+                    $("#price-range").text("$" + ui.values[0] + " - $" + ui.values[1]);
                 }
             });
         });
-
-        // Actualizar el rango de precio al mover el slider
-        $("#price-slider").on("slide", function (event, ui) {
-            priceRange.text("$" + ui.values[0] + " - $" + ui.values[1]);
-        });
-
-        // Mostrar vista previa del producto al hacer clic en el botón "Vista Previa"
-        $(".btn-description").on("click", function () {
-            var productId = $(this).data("product-id");
-            var productTitle = $(this).data("product-title");
-            var productImage = $(this).data("product-image");
-            var productDescription = $(this).data("product-description");
-
-            $("#product-modal .modal-title").text(productTitle);
-            $("#product-modal .modal-img").attr("src", productImage);
-            $("#product-modal #product-description").text(productDescription);
-        });
-
-        // Agregar al carrito desde la vista previa del producto
-        $(".btn-add-to-cart-modal").on("click", function () {
-            var quantity = $("#quantity").val();
-            var productName = $("#product-modal .modal-title").text();
-
-            // Aquí puedes agregar la lógica para agregar el producto al carrito
-
-            alert(quantity + " " + productName + " agregado(s) al carrito.");
-            $("#product-modal").modal("hide");
-        });
-    });
-</script>
-
+    </script>
 </body>
 
 </html>

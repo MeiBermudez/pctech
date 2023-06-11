@@ -1,3 +1,11 @@
+<!--<*?php
+session_start();
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['rol'] !== 'admin') {
+    header("Location: ../login.php");
+    exit;
+}
+?>-->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -68,15 +76,16 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="productos.php">
-                        <i class="bi bi-plus"></i> Agregar Producto
+                    <a class="nav-link" href="categoria.php">
+                        <i class="bi bi-plus"></i>Categorias
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="gestionarCategorias.php">
-                        <i class="bi bi-tags"></i> Gestionar Categorías
+                    <a class="nav-link" href="productos.php">
+                        <i class="bi bi-plus"></i>Productos
                     </a>
                 </li>
+               
                 <li class="nav-item">
                     <a class="nav-link" href="verInformes.php">
                         <i class="bi bi-file-earmark-bar-graph"></i> Ver Informes
